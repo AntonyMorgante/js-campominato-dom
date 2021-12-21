@@ -2,11 +2,6 @@ var correctPlays = 0; /*contatore del punteggio del giocatore */
 let fieldDimensions = 0;
 let gameIsOn = 0;
 
-function fetchDifficulty(){ /* recupera la difficoltà desiderata */
-    const difficulty= document.getElementById("difficulty").value;
-    return difficulty;
-}
-
 function genField(n){ /* genera un campo di dimensioni n*n */
     let field = document.getElementById("play-field");
     field.innerHTML = ""; /* rimuove il contenuto precedente */
@@ -40,7 +35,8 @@ function genBombs(number,sup){ /* crea una lista di numeri interi unici tra 0 e 
     }
 }
 
-function genBoard(difficulty){ /* a seconda della difficoltà scelta crea un campo differente */
+function createGame(){ /* a seconda della difficoltà scelta crea un campo differente */
+    const difficulty= document.getElementById("difficulty").value;
     gameIsOn = 1;
     correctPlays = 0; /* azzera il punteggio del giocatore */
     if (difficulty == 1){
@@ -58,10 +54,6 @@ function genBoard(difficulty){ /* a seconda della difficoltà scelta crea un cam
         genBombs(16,49);
         fieldDimensions = 49
     }
-}
-
-function createGame(){
-    genBoard(fetchDifficulty());  
 }
 
 function endGame(){
