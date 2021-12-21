@@ -1,5 +1,4 @@
 var correctPlays = 0; /*contatore del punteggio del giocatore */
-let field = document.getElementById("play-field");
 let fieldDimensions = 0;
 let gameIsOn = 0;
 
@@ -9,6 +8,7 @@ function fetchDifficulty(){ /* recupera la difficoltà desiderata */
 }
 
 function genField(n){ /* genera un campo di dimensioni n*n */
+    let field = document.getElementById("play-field");
     field.innerHTML = ""; /* rimuove il contenuto precedente */
     for (let i=0; i<n;i++){
         field.innerHTML += `<div class="row"></div>`; /* crea n righe */
@@ -79,6 +79,7 @@ function endGame(){
 function clickColor(event){ 
     if(gameIsOn == 1){
         if (event.target.classList.contains("bomb")){ /* caso in cui si clicca una cella che contiene una bomba */
+            let field = document.getElementById("play-field");
             field.innerHTML += `<h3>Hai perso! Il tuo punteggio finale è ` + correctPlays + `. Ritenta!</h3>`;
             endGame();
         }
@@ -89,6 +90,7 @@ function clickColor(event){
             event.target.classList.add("safe-clicked"); /* identifica il quadrato cliccato e lo colora di blu*/
             event.target.classList.remove("point"); /* togli il pointer dall'elemento cliccato */
             if (correctPlays == fieldDimensions -16){ /* controlla se il giocatore ha cliccato tutte le caselle tranne quelle in cui ci sono bombe */
+                let field = document.getElementById("play-field");
                 field.innerHTML += `<h3>Hai vinto la partita!</h3>`;
                 endGame();
             }
