@@ -64,19 +64,23 @@ function createGame(){
     genBoard(fetchDifficulty());  
 }
 
+function endGame(){
+    gameisOn = 0;
+    let squares = document.querySelectorAll(".square")
+    for (let i=0; i<squares.length; i++){
+        squares[i].classList.remove("point");  /*togli il pointer da tutte le caselle */
+    }
+    let bombArray = document.querySelectorAll(".bomb"); /* crea una lista di tutte le celle con una bomba */
+    for (let i=0; i<bombArray.length; i++){
+        bombArray[i].classList.add("bomb-clicked"); /* colora di rosso tutte le celle con una bomba */
+    }
+}
+
 function clickColor(event){ 
     if(gameIsOn == 1){
         if (event.target.classList.contains("bomb")){ /* caso in cui si clicca una cella che contiene una bomba */
-            let bombArray = document.querySelectorAll(".bomb"); /* crea una lista di tutte le celle con una bomba */
-            for (let i=0; i<bombArray.length; i++){
-                bombArray[i].classList.add("bomb-clicked"); /* colora di rosso tutte le celle con una bomba */
-            }
-            gameIsOn = 0;
             field.innerHTML += `<h3>Hai perso! Il tuo punteggio finale è ` + correctPlays + `. Ritenta!</h3>`;
-            let squares = document.querySelectorAll(".square")
-            for (let i=0; i<squares.length; i++){
-                squares[i].classList.remove("point");  /*togli il pointer da tutte le caselle */
-            }
+            endGame();
         }
         else{
             if (!(event.target.classList.contains("safe-clicked"))){ /* controlla che non si clicchi più volte la stessa casella sicura */
@@ -86,11 +90,7 @@ function clickColor(event){
             event.target.classList.remove("point"); /* togli il pointer dall'elemento cliccato */
             if (correctPlays == fieldDimensions -16){ /* controlla se il giocatore ha cliccato tutte le caselle tranne quelle in cui ci sono bombe */
                 field.innerHTML += `<h3>Hai vinto la partita!</h3>`;
-                gameIsOn = 0;
-                let squares = document.querySelectorAll(".square")
-                for (let i=0; i<squares.length; i++){
-                    squares[i].classList.remove("point");  /*togli il pointer da tutte le caselle */
-                }
+                endGame();
             }
         }
     }
