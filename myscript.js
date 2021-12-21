@@ -57,7 +57,7 @@ function createGame(){ /* a seconda della difficoltà scelta crea un campo diffe
 }
 
 function endGame(){
-    gameisOn = 0;
+    gameIsOn = 0;
     let squares = document.querySelectorAll(".square")
     for (let i=0; i<squares.length; i++){
         squares[i].classList.remove("point");  /*togli il pointer da tutte le caselle */
